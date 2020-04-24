@@ -1,7 +1,45 @@
 # CarND-Controls-PID
+
+[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+
 Self-Driving Car Engineer Nanodegree Program
 
 ---
+
+## Overwiew
+
+I implemented a PID controller for the steering angle of a self_driving car in C++. The steering wheel value depends on the Cross Track Error (CTE) defined as the displacement error from the center of the line.
+
+## Output
+
+Here is the video output of the project's run on simulator: [Output Video](./output_PID_Controller.mp4)
+
+## Hyperparameters
+
+#### Proportional component - P:
+The Proportional component - P is acts on the current displacement error. A high value will lead to a very sudden adjustement which may give an unstable behavior. Whereas, a very low value will lead to a smooth response, but not enough for keeping the car on the track.
+
+#### Integral component - I:
+The Integral component - I acts on the steady-state behavior and helps correct the steering bias, such as a constant mis-orientation of the wheels. During the tuning, it is observed that if it's too high, overshoot is experienced.
+
+#### Derivative component - D:
+The Derivative component - D acts on the difference between the current error and the previous error. It can be observed that when it is too high, overshoot and instability is there. If it's too low, the vehicle will react too slowly and it will drive off the track.
+
+## Tuning
+
+### Manual tuning
+
+The PID parameters were first tuned manually. Each parameter was tuned with the other two params set to 0, in order to see single effects of the tunes. This gave the values used for initialization and starting point for the twiddle algorithm.
+
+### Twiddle
+
+After the manual tuning, twiddle algorithm was used. This lead to small changes in the I and D param and little more change in P param.
+
+Parameter | Manual | Twiddle |
+|:-------:|:------:|:-------:|
+|P        | 0.15   | 0.1600  |
+|I        | 0.005  | 0.005001|
+|D        | 5.0    | 5.00106 |
 
 ## Dependencies
 
